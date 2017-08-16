@@ -26,3 +26,15 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('recipes', 'RecipesController');
+
+Route::resource('ingredients', 'IngredientsController');
+
+Route::resource('recipe.categories', 'RecipeCategoriesController');
+
+Route::resource('recipe.ingredients', 'RecipeIngredientsController');
+
+Route::resource('ingredient.categories', 'IngredientCategoriesController');
+
+Route::resource('measurements', 'MeasurementsController');

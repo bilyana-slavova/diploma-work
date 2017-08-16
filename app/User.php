@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function favoriterRecipes()
+    {
+        return $this->belongsToMany('App\Recipe', 'favorite_recipes', 'user_id', 'recipe_id');
+    }
 }

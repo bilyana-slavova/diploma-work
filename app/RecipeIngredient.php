@@ -12,10 +12,4 @@ class RecipeIngredient extends Model
     {
     return $this->belongsTo('App\Recipe');
     }
-
-    public function ingredient()
-   {
-       return $this->belongsTo('App\Ingredient');
-   }
-
 }

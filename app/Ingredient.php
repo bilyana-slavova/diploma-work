@@ -9,7 +9,7 @@ class Ingredient extends Model
     //
     public function ingredientCategory()
     {
-       return $this->belongsTo('App\ingredientCategory');
+       return $this->belongsTo('App\IngredientCategory');
     }
 
     public function recipeIngredient()

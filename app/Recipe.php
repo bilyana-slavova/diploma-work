@@ -12,15 +12,11 @@ class Recipe extends Model
        return $this->hasMany('App\RecipeIngredient');
    }
 
-   public function recipeCategory()
-   {
-      return $this->belongsTo('App\RecipeCategory');
+   /**
+     * The users that have added this recipe to their favorites.
+     */
+    public function favoriters()
+    {
+        return $this->belongsToMany('App\User', 'favorite_recipes', 'recipe_id', 'user_id');
     }
-
-    public function instruction()
-   {
-       return $this->hasMany('App\Insctruction');
-   }
-
-
 }
