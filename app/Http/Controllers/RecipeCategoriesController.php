@@ -14,7 +14,9 @@ class RecipeCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $recipeCategories = RecipeCategory::all();
+
+        return view('recipes.categories.index', compact('recipeCategories'));
     }
 
     /**
@@ -24,7 +26,8 @@ class RecipeCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', RecipeCategory::class);
+        return view('recipes.categories.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class RecipeCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', RecipeCategory::class);
+        $recipeCategory = new RecipeCategory;
+
+        $recipeCategory->name = $request->name;
+
+        $recipeCategory->save();
+        return back();
     }
 
     /**
@@ -46,7 +55,7 @@ class RecipeCategoriesController extends Controller
      */
     public function show(RecipeCategory $recipeCategory)
     {
-        //
+        return view('recipes.categories.show', compact('recipeCategory'));
     }
 
     /**
@@ -57,7 +66,9 @@ class RecipeCategoriesController extends Controller
      */
     public function edit(RecipeCategory $recipeCategory)
     {
-        //
+        $this->authorize('update', $recipeCategory);
+
+        return view('recipes.categories.edit', compact('recipeCategory'));
     }
 
     /**
@@ -69,7 +80,13 @@ class RecipeCategoriesController extends Controller
      */
     public function update(Request $request, RecipeCategory $recipeCategory)
     {
-        //
+        $this->authorize('update', $recipeCategory);
+
+        $recipeCategory->name = $request->name;
+
+        $recipeCategory->save();
+
+        return back();
     }
 
     /**
@@ -80,6 +97,10 @@ class RecipeCategoriesController extends Controller
      */
     public function destroy(RecipeCategory $recipeCategory)
     {
-        //
+        $this->authorize('delete', $recipeCategory);
+
+        $recipeCategory->delete();
+
+        return view('recipes.categories.index');
     }
 }

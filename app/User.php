@@ -31,4 +31,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Recipe', 'favorite_recipes', 'user_id', 'recipe_id');
     }
+
+    public function isAdmin()
+    {
+        return $this->type === 'admin';
+
+    }
 }

@@ -30,6 +30,8 @@ class RecipesController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Recipe::class);
+
         $recipeCategories = RecipeCategory::all();
 
         return view('recipes.create', compact('recipeCategories'));
@@ -90,11 +92,17 @@ class RecipesController extends Controller
      * @param  \App\Recipe  $recipe
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(StoreRecipe $request, Recipe $recipe)
     {
         $this->authorize('update', $recipe);
 
-        // Same as store
+        $recipe->name = $request->name;
+        $recipe->category_id = $request->category_id;
+        $recipe->prep_time = $request->prep_time;
+        $recipe->cook_time = $request->cook_time;
+        $recipe->instructions = $request->instructions;
+
+        $recipe->save();
     }
 
     /**

@@ -31,9 +31,13 @@ Route::resource('recipes', 'RecipesController');
 
 Route::resource('ingredients', 'IngredientsController');
 
-Route::resource('recipe.categories', 'RecipeCategoriesController');
+Route::resource('recipe-categories', 'RecipeCategoriesController', ['parameters' => [
+    'recipe_category' => 'category'
+]]);
 
-Route::resource('recipe.ingredients', 'RecipeIngredientsController');
+Route::resource('recipe-ingredients', 'RecipeIngredientsController', ['parameters' => [
+    'recipe_ingredient' => 'ingredient'
+]]);
 
 Route::resource('ingredient.categories', 'IngredientCategoriesController');
 
