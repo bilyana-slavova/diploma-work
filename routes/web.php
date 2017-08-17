@@ -39,6 +39,6 @@ Route::resource('recipe-ingredients', 'RecipeIngredientsController', ['parameter
     'recipe_ingredient' => 'ingredient'
 ]]);
 
-Route::resource('ingredient.categories', 'IngredientCategoriesController');
+Route::resource('ingredient-categories', 'IngredientCategoriesController');
 
 Route::resource('measurements', 'MeasurementsController');

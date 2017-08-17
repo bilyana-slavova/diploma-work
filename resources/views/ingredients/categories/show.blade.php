@@ -1,0 +1,1 @@
+<p>{{ $ingredientCategory->name }}</p>

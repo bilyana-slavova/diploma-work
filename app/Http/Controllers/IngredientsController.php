@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\IngredientCategory;
 use Illuminate\Http\Request;
 
 class IngredientsController extends Controller
@@ -14,7 +15,8 @@ class IngredientsController extends Controller
      */
     public function index()
     {
-        //
+        $ingredients = Ingredient::all();
+        return view('ingredients.index', compact('ingredients'));
     }
 
     /**
@@ -24,7 +26,8 @@ class IngredientsController extends Controller
      */
     public function create()
     {
-        //
+      $ingredientCategories = IngredientCategory::all();
+      return view('ingredients.create', compact('ingredientCategories'));
     }
 
     /**
@@ -35,7 +38,13 @@ class IngredientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $ingredient = new Ingredient;
+
+      $ingredient->name = $request->name;
+      $ingredient->category_id = $request->category_id;
+      $ingredient->save();
+
+      return back()->withMessage('success', 'Successfully created new ingredient!');
     }
 
     /**
@@ -46,7 +55,7 @@ class IngredientsController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        //
+        return view('ingredients.show', compact('ingredient'));
     }
 
     /**
@@ -57,7 +66,7 @@ class IngredientsController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
-        //
+        return view('ingredients.edit', compact('ingredient'));
     }
 
     /**
@@ -69,7 +78,10 @@ class IngredientsController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient)
     {
-        //
+        $ingredient->name = $request->name;
+        $ingredient->category_id = $request->category_id;
+        $ingredient->save();
+        return back();
     }
 
     /**
@@ -80,6 +92,7 @@ class IngredientsController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+        return view('ingredients.index');
     }
 }

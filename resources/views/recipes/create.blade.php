@@ -29,7 +29,7 @@
                             <label for="category" class="col-md-4 control-label">Category</label>
 
                             <div class="col-md-6">
-                                <select id="category" class="form-control" name="category" required>
+                                <select id="category" class="form-control" name="category_id" required>
                                   @foreach($recipeCategories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                   @endforeach

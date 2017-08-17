@@ -14,7 +14,9 @@ class IngredientCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $ingredientCategories = IngredientCategory::all();
+
+        return view('ingredients.categories.index', compact('ingredientCategories'));
     }
 
     /**
@@ -24,7 +26,7 @@ class IngredientCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('ingredients.categories.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class IngredientCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ingredientCategory = new IngredientCategory;
+
+        $ingredientCategory->name = $request->name;
+        $ingredientCategory->save();
+        return back();
     }
 
     /**
@@ -46,7 +52,8 @@ class IngredientCategoriesController extends Controller
      */
     public function show(IngredientCategory $ingredientCategory)
     {
-        //
+        return view('ingredients.categories.show', compact('ingredientCategory'));
+
     }
 
     /**
@@ -57,7 +64,7 @@ class IngredientCategoriesController extends Controller
      */
     public function edit(IngredientCategory $ingredientCategory)
     {
-        //
+        return view('ingredients.categories.edit', compact('ingredientCategory'));
     }
 
     /**
@@ -69,7 +76,11 @@ class IngredientCategoriesController extends Controller
      */
     public function update(Request $request, IngredientCategory $ingredientCategory)
     {
-        //
+        $ingredientCategory->name = $request->name;
+
+        $ingredientCategory->save();
+
+        return back();
     }
 
     /**
@@ -80,6 +91,8 @@ class IngredientCategoriesController extends Controller
      */
     public function destroy(IngredientCategory $ingredientCategory)
     {
-        //
+      $ingredientCategory->delete();
+
+      return view('ingredients.categories.index');
     }
 }
