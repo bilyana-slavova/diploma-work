@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Recipe;
 use App\RecipeCategory;
+use App\Measurement;
 
-use App\Requests\StoreRecipe;
+use App\Http\Requests\StoreRecipe;
 
 use Illuminate\Http\Request;
 
@@ -33,8 +34,9 @@ class RecipesController extends Controller
         $this->authorize('create', Recipe::class);
 
         $recipeCategories = RecipeCategory::all();
+        $measurements = Measurement::all();
 
-        return view('recipes.create', compact('recipeCategories'));
+        return view('recipes.create', compact('recipeCategories', 'measurements'));
     }
 
     /**
@@ -53,7 +55,7 @@ class RecipesController extends Controller
         $recipe->category_id = $request->category_id;
         $recipe->prep_time = $request->prep_time;
         $recipe->cook_time = $request->cook_time;
-        $recipe->instructions = $request->instructions;
+        $recipe->instructions = $request->instructions;        
 
         $recipe->save();
 
@@ -129,6 +131,8 @@ class RecipesController extends Controller
     public function favorite(Recipe $recipe)
     {
         $this->authorize('favorite', $recipe);
+
+        Auth::user()->favoriteRecipes()->attach($recipe);
 
         return back();
     }

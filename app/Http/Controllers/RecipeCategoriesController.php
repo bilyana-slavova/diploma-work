@@ -101,6 +101,6 @@ class RecipeCategoriesController extends Controller
 
         $recipeCategory->delete();
 
-        return view('recipes.categories.index');
+        return back();
     }
 }

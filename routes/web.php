@@ -42,3 +42,5 @@ Route::resource('recipe-ingredients', 'RecipeIngredientsController', ['parameter
 Route::resource('ingredient-categories', 'IngredientCategoriesController');
 
 Route::resource('measurements', 'MeasurementsController');
+
+Route::get('autocomplete', function() { return View::make('autocomplete'); });

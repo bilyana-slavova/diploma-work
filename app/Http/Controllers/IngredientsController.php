@@ -93,6 +93,6 @@ class IngredientsController extends Controller
     public function destroy(Ingredient $ingredient)
     {
         $ingredient->delete();
-        return view('ingredients.index');
+        return back();
     }
 }

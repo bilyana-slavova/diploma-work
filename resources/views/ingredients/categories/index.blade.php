@@ -5,6 +5,8 @@
     @forelse($ingredientCategories as $ingredientCategory)
       <li>
           @include('ingredients.categories.show')
+          
+          @include('ingredients.categories.destroy')
       </li>
     @empty
       <p>No ingredient categories yet!</p>

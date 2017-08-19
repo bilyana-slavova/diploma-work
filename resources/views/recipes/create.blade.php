@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Create Recipe</div>
                 <div class="panel-body">
@@ -86,15 +86,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Create
-                                </button>
+                        @include('recipes.partials.recipe-ingredients')
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4" style ="text-align:center;">
+                                <button type="submit" class="btn btn-primary">
+                                    Save
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -102,5 +100,5 @@
             </div>
         </div>
     </div>
-</div>
+
 @endsection

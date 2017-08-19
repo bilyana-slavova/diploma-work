@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Ingredient;
+use App\Measurement;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class IngredientPolicy
+class MeasurementPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class IngredientPolicy
     }
 
     /**
-     * Determine whether the user can view the ingredient.
+     * Determine whether the user can view the measurement.
      *
      * @param  \App\User  $user
-     * @param  \App\Ingredient  $ingredient
+     * @param  \App\Measurement  $measurement
      * @return mixed
      */
-    public function view(User $user, Ingredient $ingredient)
+    public function view(User $user, Measurement $measurement)
     {
         return true;
     }
 
     /**
-     * Determine whether the user can create ingredients.
+     * Determine whether the user can create measurements.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -41,25 +41,25 @@ class IngredientPolicy
     }
 
     /**
-     * Determine whether the user can update the ingredient.
+     * Determine whether the user can update the measurement.
      *
      * @param  \App\User  $user
-     * @param  \App\Ingredient  $ingredient
+     * @param  \App\Measurement  $measurement
      * @return mixed
      */
-    public function update(User $user, Ingredient $ingredient)
+    public function update(User $user, Measurement $measurement)
     {
         return false;
     }
 
     /**
-     * Determine whether the user can delete the ingredient.
+     * Determine whether the user can delete the measurement.
      *
      * @param  \App\User  $user
-     * @param  \App\Ingredient  $ingredient
+     * @param  \App\Measurement  $measurement
      * @return mixed
      */
-    public function delete(User $user, Ingredient $ingredient)
+    public function delete(User $user, Measurement $measurement)
     {
         return false;
     }

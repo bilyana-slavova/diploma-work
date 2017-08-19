@@ -1,4 +1,4 @@
-<form class="" action="{{ route('ingredients.destroy', ['ingredient' => $ingredient->id]) }}" method="POST">
+<form class="" action="{{ route('measurements.destroy', ['measurement' => $measurement->id]) }}" method="post">
   {{ csrf_field() }}
   {{ method_field('DELETE') }}
 

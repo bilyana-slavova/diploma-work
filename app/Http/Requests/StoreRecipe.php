@@ -13,7 +13,7 @@ class StoreRecipe extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class StoreRecipe extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'category_id' => 'required|exists:recipe_category',
+            'category_id' => 'required|exists:recipe_category,id',
             'prep_time' => 'required|numeric',
             'cook_time' => 'required|numeric',
             'instructions' => 'required'

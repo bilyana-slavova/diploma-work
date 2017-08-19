@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
 
@@ -20,7 +20,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li>
-                  <a href="/">Home</a>
+                  <a href="/recipes/">Recipes</a>
                 </li>
 
                 <li>
@@ -29,6 +29,12 @@
 
                 <li>
                   <a href="/contact">Contact</a>
+                </li>
+
+                <li>
+                  <a href="#" id="sidebar-toggle">
+                    <span class="glyphicon glyphicon-search"></span>
+                  </a>
                 </li>
             </ul>
 
@@ -55,6 +61,13 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
+                            </li>
+
+                            <li>
+                              <a href="#">
+                                Favourite Recipes
+                                <span class="glyphicon glyphicon-heart"></span>
+                              </a>
                             </li>
                         </ul>
                     </li>

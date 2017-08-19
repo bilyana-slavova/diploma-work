@@ -20,3 +20,37 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+$(document).ready(function(){
+  var ingredientId = 0;
+
+  $(document).on('click', '#addIngredient', cloneIngredient);
+  $(document).on('click', '.btn-remove', removeIngredient);
+
+  $("#sidebar-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+
+  function cloneIngredient(e){
+    e.preventDefault();
+    console.log('cloned');
+    ingredientId++;
+
+    $newIngredient = $('.ingredient').first().clone();
+    $newIngredient.attr("id", "ingredient_" +  ingredientId);
+    $removeIngredient = $('<a href="#" class="btn btn-remove">x</a>');
+    $removeIngredient.attr('id', 'removeIngredient_' + ingredientId);
+    $removeIngredient.attr('data-id', ingredientId);
+    $newIngredient.find('.form-group').first().append($removeIngredient);
+    $newIngredient.appendTo('.ingredients');
+  };
+
+  function removeIngredient(e){
+    e.preventDefault();
+    console.log('removed');
+    $currentIngredientId = $(this).attr('data-id');
+    $('#ingredient_'+ $currentIngredientId).remove();
+  };
+});

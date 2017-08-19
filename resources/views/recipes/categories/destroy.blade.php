@@ -1,4 +1,4 @@
-<form class="" action="{{ route('recipe-categories.destroy', ['recipe_category' => $recipeCategory->id]) }}" method="post">
+<form class="" action="{{ route('recipe-categories.destroy', ['recipe_category' => $recipeCategory->id]) }}" method="POST">
   {{ csrf_field() }}
   {{ method_field('DELETE') }}
 

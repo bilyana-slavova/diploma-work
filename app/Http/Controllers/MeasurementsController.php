@@ -14,7 +14,9 @@ class MeasurementsController extends Controller
      */
     public function index()
     {
-        //
+      $measurements = Measurement::all();
+
+      return view('measurements.index', compact('measurements'));
     }
 
     /**
@@ -24,7 +26,7 @@ class MeasurementsController extends Controller
      */
     public function create()
     {
-        //
+        return view('measurements.create');
     }
 
     /**
@@ -35,7 +37,11 @@ class MeasurementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $measurement = new Measurement;
+        $measurement->name = $request->name;
+        $measurement->save();
+
+        return back()->withMessage('success', 'Successfully created measurement!');
     }
 
     /**
@@ -46,7 +52,7 @@ class MeasurementsController extends Controller
      */
     public function show(Measurement $measurement)
     {
-        //
+        return view('measurements.show', compact('measurement'));
     }
 
     /**
@@ -57,7 +63,7 @@ class MeasurementsController extends Controller
      */
     public function edit(Measurement $measurement)
     {
-        //
+        return view('measurements.edit', compact('measurement'));
     }
 
     /**
@@ -69,7 +75,8 @@ class MeasurementsController extends Controller
      */
     public function update(Request $request, Measurement $measurement)
     {
-        //
+        $measurement->name = $request->name;
+        $measurement->save();
     }
 
     /**
@@ -80,6 +87,7 @@ class MeasurementsController extends Controller
      */
     public function destroy(Measurement $measurement)
     {
-        //
+        $measurement->delete();
+        return back();
     }
 }

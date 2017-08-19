@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('ingredients.create') }}">Create Ingredient</a>
-
   <ul>
     @forelse($ingredients as $ingredient)
       <li>
@@ -12,6 +10,8 @@
       </li>
     @empty
       <p>No ingredients yet!</p>
+
     @endforelse
   </ul>
+  <a href="{{ route('ingredients.create') }}" class="btn btn-primary">Create Ingredient</a>
 @endsection

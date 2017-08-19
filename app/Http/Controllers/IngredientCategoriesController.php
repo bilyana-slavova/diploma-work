@@ -93,6 +93,6 @@ class IngredientCategoriesController extends Controller
     {
       $ingredientCategory->delete();
 
-      return view('ingredients.categories.index');
+      return back();
     }
 }

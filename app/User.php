@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function favoriterRecipes()
+    public function favoriteRecipes()
     {
         return $this->belongsToMany('App\Recipe', 'favorite_recipes', 'user_id', 'recipe_id');
     }
@@ -35,6 +35,5 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->type === 'admin';
-
     }
 }

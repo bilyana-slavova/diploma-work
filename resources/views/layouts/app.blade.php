@@ -15,15 +15,36 @@
 </head>
 <body>
     <div id="app">
-        @include('inc.navbar')
+      @include('inc.navbar')
+      <div id="wrapper" class="">
+          <div id="sidebar-wrapper">
+            <div class="sidebar-inner">
+              <h4>Search Recipe by Ingredient</h4>
 
-        @yield('content')
+              @include('autocomplete')
+
+            </div>
+        </div>
+
+        <div id="page-content-wrapper">
+
+            @yield('content')
+
+
+        </div>
+      </div>
+
+      <footer class="footer text-center">
+        <p>Copyright 2017 &copy </p>
+      </footer>
     </div>
 
-    <footer class="footer text-center">
-      <p>Copyright 2017 &copy </p>
-    </footer>
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
