@@ -11,8 +11,8 @@ class Ingredient extends Model
        return $this->belongsTo('App\IngredientCategory');
     }
 
-    public function recipeIngredient()
+    public function recipes()
    {
-       return $this->hasMany('App\RecipeIngredient');
+       return $this->belongsToMany('App\Recipe', 'recipe_ingredients', 'ingredient_id', 'recipe_id');
    }
 }

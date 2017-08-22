@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <ul>
+  <ul class="categories">
     @forelse($measurements as $measurement)
       <li>
           @include('measurements.show')

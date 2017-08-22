@@ -28,7 +28,18 @@ class StoreRecipe extends FormRequest
             'category_id' => 'required|exists:recipe_category,id',
             'prep_time' => 'required|numeric',
             'cook_time' => 'required|numeric',
-            'instructions' => 'required'
+            'instructions' => 'required',
+            'ingredients.*.id' => 'exists:ingredients',
+            'ingredients.*.amount' => 'required|numeric|min:1',
+            'ingredients.*.measurement' => 'required|exists:measurements,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+          'ingredients.*.id.exists' => 'No such ingredient.',
+          'ingredients.*.measurement.exists' => 'No such measurements.'
         ];
     }
 }

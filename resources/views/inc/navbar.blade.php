@@ -20,7 +20,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li>
-                  <a href="/recipes/">Recipes</a>
+                  <a href="/recipes/">All Recipes</a>
                 </li>
 
                 <li>
@@ -51,24 +51,36 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
+                          <li>
+                            <a href="{{ route('recipes.create') }}">
+                              <span class="	glyphicon glyphicon-cutlery"></span>
+                              Create Recipe
+                            </a>
+                          </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                          <li>
+                            <a href="{{ route('recipes.favorites.index') }}">
+                              <span class="glyphicon glyphicon-heart"></span>
+                              Favourite Recipes
+                            </a>
+                          </li>
 
-                            <li>
-                              <a href="#">
-                                Favourite Recipes
-                                <span class="glyphicon glyphicon-heart"></span>
+                          <li>
+                              <a href="{{ route('logout') }}"
+                                  onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                  <span class="	glyphicon glyphicon-log-out"></span>
+                                  Logout
                               </a>
-                            </li>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  {{ csrf_field() }}
+                              </form>
+                          </li>
+
+                          <li>
+                            <a href="{{ route('recipe-categories.index') }}">Categories</a>
+                          </li>
                         </ul>
                     </li>
                 @endif

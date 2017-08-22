@@ -11,6 +11,12 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+
+    require('jquery-ui/ui/core.js');
+    require('jquery-ui/ui/widget.js');
+    require('jquery-ui/ui/position.js');
+    require('jquery-ui/ui/widgets/autocomplete.js');
+    require('tag-it');
 } catch (e) {}
 
 /**

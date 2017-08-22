@@ -16,6 +16,8 @@ class AuthServiceProvider extends ServiceProvider
         'App\Recipe' => 'App\Policies\RecipePolicy',
         'App\RecipeCategory' => 'App\Policies\RecipeCategoryPolicy',
         'App\Ingredient' => 'App\Policies\IngredientPolicy',
+        'App\Measurement' => 'App\Policies\MeasurementPolicy',
+
     ];
 
     /**

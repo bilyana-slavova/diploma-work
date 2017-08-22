@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('layouts/app');
+    return view('about');
 });
 
 Route::get('/about', function () {
@@ -26,6 +26,9 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/recipes/{recipe}/favorite', 'RecipesController@favorite')->name('recipes.favorite');
+Route::get('/recipes/favorite', 'RecipesController@getFavorite')->name('recipes.favorites.index');
+Route::get('/ingredients/find', 'IngredientsController@find');
 
 Route::resource('recipes', 'RecipesController');
 
@@ -42,5 +45,3 @@ Route::resource('recipe-ingredients', 'RecipeIngredientsController', ['parameter
 Route::resource('ingredient-categories', 'IngredientCategoriesController');
 
 Route::resource('measurements', 'MeasurementsController');
-
-Route::get('autocomplete', function() { return View::make('autocomplete'); });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <ul>
+  <ul class="categories">
     @forelse($recipeCategories as $recipeCategory)
       <li>
           @include('recipes.categories.show')

@@ -26,6 +26,8 @@ class MeasurementsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Measurement::class);
+
         return view('measurements.create');
     }
 
@@ -37,6 +39,8 @@ class MeasurementsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Measurement::class);
+
         $measurement = new Measurement;
         $measurement->name = $request->name;
         $measurement->save();
@@ -63,6 +67,8 @@ class MeasurementsController extends Controller
      */
     public function edit(Measurement $measurement)
     {
+        $this->authorize('update', $measurement);
+
         return view('measurements.edit', compact('measurement'));
     }
 
@@ -75,6 +81,8 @@ class MeasurementsController extends Controller
      */
     public function update(Request $request, Measurement $measurement)
     {
+        $this->authorize('update', $measurement);
+
         $measurement->name = $request->name;
         $measurement->save();
     }
@@ -87,6 +95,8 @@ class MeasurementsController extends Controller
      */
     public function destroy(Measurement $measurement)
     {
+        $this->authorize('delete', $measurement);
+
         $measurement->delete();
         return back();
     }

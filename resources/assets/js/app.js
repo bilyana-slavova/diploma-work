@@ -28,6 +28,14 @@ $(document).ready(function(){
   $(document).on('click', '#addIngredient', cloneIngredient);
   $(document).on('click', '.btn-remove', removeIngredient);
 
+  $('#tagit').tagit({
+    autocomplete: {
+      source: '/ingredients/find',
+      minLength: 3
+    },
+    placeholderText: 'Type your ingredient'
+  });
+
   $("#sidebar-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -40,6 +48,11 @@ $(document).ready(function(){
 
     $newIngredient = $('.ingredient').first().clone();
     $newIngredient.attr("id", "ingredient_" +  ingredientId);
+    $newIngredient.find('[name]').each(function() {
+      var name = $(this).attr('name');
+      console.log(name);
+      $(this).attr('name', name.replace(/ingredients\[\d+\]/g, `ingredients[${ingredientId}]`));
+    })
     $removeIngredient = $('<a href="#" class="btn btn-remove">x</a>');
     $removeIngredient.attr('id', 'removeIngredient_' + ingredientId);
     $removeIngredient.attr('data-id', ingredientId);

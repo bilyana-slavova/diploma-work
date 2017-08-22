@@ -2,44 +2,46 @@
   <a href="" class="btn btn-success" id="addIngredient">Add</a>
 
   <div class="ingredient">
-    <div class="form-group{{ $errors->has('ingredient') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('ingredients.'.$index.'.id') ? ' has-error' : '' }}">
         <label for="ingredient" class="col-md-4 control-label">Ingredient</label>
 
         <div class="col-md-6">
-            <input id="ingredient" type="text" class="form-control" name="ingredient" value="{{ old('ingredient') }}" required autofocus>
+            <input id="ingredient" type="text" class="form-control" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required autofocus>
 
-            @if ($errors->has('ingredient'))
+            <!-- <input type="hidden" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required> -->
+
+            @if ($errors->has('ingredients.'.$index.'.id'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('ingredient') }}</strong>
+                    <strong>{{ $errors->first('ingredients.'.$index.'.id') }}</strong>
                 </span>
             @endif
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('ingredients.'.$index.'.amount') ? ' has-error' : '' }}">
         <label for="amount" class="col-md-4 control-label">Amount</label>
 
         <div class="col-md-3">
-            <input id="amount" type="text" class="form-control" name="amount" value="{{ old('amount') }}" required autofocus>
+            <input id="amount" type="text" class="form-control" name="ingredients[{{$index}}][amount]" value="{{ old('ingredients.'.$index.'.amount') }}" required autofocus>
 
-            @if ($errors->has('amount'))
+            @if ($errors->has('ingredients.'.$index.'.amount'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('amount') }}</strong>
+                    <strong>{{ $errors->first('ingredients.'.$index.'.amount') }}</strong>
                 </span>
             @endif
         </div>
 
         @if($measurements->count())
         <div class="col-md-3">
-          <select id="measurement" class="form-control" name="measurement" required>
+          <select id="measurement" class="form-control" name="ingredients[{{$index}}][measurement]" required>
             @foreach($measurements as $measurement)
               <option value="{{ $measurement->id }}">{{ $measurement->name }}</option>
             @endforeach
           </select>
 
-            @if ($errors->has('measurement'))
+            @if ($errors->has('ingredients.'.$index.'.measurement'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('measurement') }}</strong>
+                    <strong>{{ $errors->first('ingredients.'.$index.'.measurement') }}</strong>
                 </span>
             @endif
         </div>

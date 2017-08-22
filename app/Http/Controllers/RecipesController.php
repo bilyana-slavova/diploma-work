@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Recipe;
 use App\RecipeCategory;
 use App\Measurement;
+use Auth;
 
 use App\Http\Requests\StoreRecipe;
 
@@ -20,6 +21,7 @@ class RecipesController extends Controller
     public function index()
     {
         $recipes = Recipe::all();
+        $recipes->load('category', 'ingredients');
 
         return view('recipes.index', compact('recipes'));
     }
@@ -35,8 +37,10 @@ class RecipesController extends Controller
 
         $recipeCategories = RecipeCategory::all();
         $measurements = Measurement::all();
+        $ingredients = !is_null(old('ingredients')) ? old('ingredients') : [];
+        // dd($ingredients);
 
-        return view('recipes.create', compact('recipeCategories', 'measurements'));
+        return view('recipes.create', compact('recipeCategories', 'measurements', 'ingredients'));
     }
 
     /**
@@ -55,10 +59,22 @@ class RecipesController extends Controller
         $recipe->category_id = $request->category_id;
         $recipe->prep_time = $request->prep_time;
         $recipe->cook_time = $request->cook_time;
-        $recipe->instructions = $request->instructions;        
-
+        $recipe->instructions = $request->instructions;
+        $recipe->user_id = Auth::user()->id;
         $recipe->save();
 
+        $ingredients = collect($request->ingredients)->keyBy('id');
+
+        foreach ($ingredients as $key => $ingredient) {
+          $temp = $ingredient;
+          $temp['measurement_id'] = $ingredient['measurement'];
+          unset($temp['id']);
+          unset($temp['measurement']);
+
+          $ingredients[$key] = $temp;
+        }
+
+        $recipe->ingredients()->attach($ingredients);
         // TODO: redirect user to the newly created recipe's page
         return back()->withMessage('success', 'Successfully created new recipe!');
     }
@@ -135,5 +151,14 @@ class RecipesController extends Controller
         Auth::user()->favoriteRecipes()->attach($recipe);
 
         return back();
+    }
+
+    public function getFavorite(Recipe $recipe)
+    {
+        // $this->authorize('favorite', $recipe);
+
+        $recipes = Auth::user()->favoriteRecipes;
+
+        return view('recipes.favorites', compact('recipes'));
     }
 }

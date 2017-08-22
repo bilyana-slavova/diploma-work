@@ -19,7 +19,9 @@
       <div id="wrapper" class="">
           <div id="sidebar-wrapper">
             <div class="sidebar-inner">
-              <h4>Search Recipe by Ingredient</h4>
+              <div class="sidebar_title">
+                <h4>Search Recipe by Ingredient</h4>
+              </div>
 
               @include('autocomplete')
 
@@ -30,21 +32,15 @@
 
             @yield('content')
 
-
         </div>
       </div>
 
-      <footer class="footer text-center">
+      <!-- <footer class="footer text-center">
         <p>Copyright 2017 &copy </p>
-      </footer>
+      </footer> -->
     </div>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

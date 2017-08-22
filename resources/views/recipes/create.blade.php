@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="row">
         <div class="col-md-6 col-md-offset-2">
             <div class="panel panel-default">
@@ -48,7 +47,7 @@
                             <label for="prep_time" class="col-md-4 control-label">Preparation Time</label>
 
                             <div class="col-md-6">
-                                <input id="prep_time" type="number" class="form-control" name="prep_time" value="{{ old('prep_time') }}" min="0" required>
+                                <input id="prep_time" type="number" class="form-control" name="prep_time" value="{{ old('prep_time') }}" min="0" required placeholder="time in minutes">
 
                                 @if ($errors->has('prep_time'))
                                     <span class="help-block">
@@ -62,7 +61,8 @@
                             <label for="cook_time" class="col-md-4 control-label">Cooking Time</label>
 
                             <div class="col-md-6">
-                                <input id="cook_time" type="number" class="form-control" name="cook_time" value="{{ old('cook_time') }}" min="0" required>
+                                <input id="cook_time" type="number" class="form-control" name="cook_time" value="{{ old('cook_time') }}" min="0" required
+                                placeholder="time in minutes">
 
                                 @if ($errors->has('cook_time'))
                                     <span class="help-block">
@@ -86,7 +86,11 @@
                             </div>
                         </div>
 
-                        @include('recipes.partials.recipe-ingredients')
+                        @forelse($ingredients as $ingredient)
+                          @include('recipes.partials.recipe-ingredients', ['index' => $loop->index])
+                        @empty
+                          @include('recipes.partials.recipe-ingredients', ['index' => 0])
+                        @endforelse
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4" style ="text-align:center;">

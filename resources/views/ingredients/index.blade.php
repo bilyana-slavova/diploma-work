@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <ul>
+  <ul class="categories">
     @forelse($ingredients as $ingredient)
       <li>
         {{ $ingredient->name }}

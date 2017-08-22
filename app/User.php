@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function favoriteRecipes()
     {
-        return $this->belongsToMany('App\Recipe', 'favorite_recipes', 'user_id', 'recipe_id');
+        return $this->belongsToMany('App\Recipe', 'favourite_recipes', 'user_id', 'recipe_id');
     }
 
     public function isAdmin()

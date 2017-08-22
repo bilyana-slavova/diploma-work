@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-  <ul>
+  <ul class="categories">
     @forelse($ingredientCategories as $ingredientCategory)
       <li>
           @include('ingredients.categories.show')
-          
+
           @include('ingredients.categories.destroy')
       </li>
     @empty

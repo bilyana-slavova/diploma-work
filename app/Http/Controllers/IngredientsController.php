@@ -95,4 +95,13 @@ class IngredientsController extends Controller
         $ingredient->delete();
         return back();
     }
+
+    public function find(Request $request)
+    {
+      	$term = $request->term;
+
+        $ingredients = Ingredient::where('name', 'like', '%' . $term . '%')->get();
+
+        return response()->json($ingredients, 200);
+  }
 }
