@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Recipe;
 use App\RecipeCategory;
 use App\Measurement;
+use App\Ingredient;
 use Auth;
 
 use App\Http\Requests\StoreRecipe;
@@ -21,7 +22,12 @@ class RecipesController extends Controller
     public function index()
     {
         $recipes = Recipe::all();
-        $recipes->load('category', 'ingredients');
+        $recipes->load('category', 'ingredients', 'favoriters');
+
+          $recipes = $recipes->map(function ($recipe) {
+            $recipe->favorited = Auth::check() && $recipe->favoriters->where('id', Auth::id())->count();
+            return $recipe;
+          });
 
         return view('recipes.index', compact('recipes'));
     }
@@ -100,7 +106,32 @@ class RecipesController extends Controller
     {
         $this->authorize('update', $recipe);
 
-        return view('recipes.edit', compact('recipe'));
+        if (is_null(old('ingredients'))) {
+
+          $recipe->load('ingredients');
+
+          $ingredients = $recipe->ingredients->map(function ($item) {
+            return [
+              'id' => $item->id,
+              'name' => $item->name,
+              'amount' => $item->pivot->amount,
+              'measurement' => $item->pivot->measurement_id
+            ];
+          });
+        } else {
+          $ingr = Ingredient::whereIn('id', collect(old('ingredients'))->pluck('id'))->get();
+          // dd($ingr);
+          $ingredients = old('ingredients');
+        }
+
+
+        $recipeCategories = RecipeCategory::all();
+        $measurements = Measurement::all();
+        // $ingredients = !is_null(old('ingredients')) ? old('ingredients') : $ingr;
+        // dd($ingredients);
+        // dd($recipe->toArray());
+
+        return view('recipes.edit', compact('recipe', 'recipeCategories', 'measurements', 'ingredients'));
     }
 
     /**
@@ -121,6 +152,8 @@ class RecipesController extends Controller
         $recipe->instructions = $request->instructions;
 
         $recipe->save();
+
+        return route('recipes.index');
     }
 
     /**
@@ -135,7 +168,7 @@ class RecipesController extends Controller
 
         $recipe->delete();
 
-        return view('recipes.index');
+        return back();
     }
 
     /**
@@ -148,7 +181,7 @@ class RecipesController extends Controller
     {
         $this->authorize('favorite', $recipe);
 
-        Auth::user()->favoriteRecipes()->attach($recipe);
+        Auth::user()->favoriteRecipes()->toggle($recipe->id);
 
         return back();
     }
@@ -160,5 +193,16 @@ class RecipesController extends Controller
         $recipes = Auth::user()->favoriteRecipes;
 
         return view('recipes.favorites', compact('recipes'));
+    }
+
+    public function find(Request $request)
+    {
+        $ingredients = $request->ingredients;
+
+        $recipes = Recipe::whereHas('ingredients', function ($query) use ($ingredients) {
+            $query->whereIn('id', $ingredients);
+        }, '=', count($ingredients))->get();
+
+        return view('recipes.index', compact('recipes'));
     }
 }

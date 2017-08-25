@@ -28,7 +28,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/recipes/{recipe}/favorite', 'RecipesController@favorite')->name('recipes.favorite');
 Route::get('/recipes/favorite', 'RecipesController@getFavorite')->name('recipes.favorites.index');
+Route::post('/recipes/find', 'RecipesController@find')->name('recipes.find');
 Route::get('/ingredients/find', 'IngredientsController@find');
+Route::post('/contact', 'HomeController@sendEmail')->name('contact.submit');
+
 
 Route::resource('recipes', 'RecipesController');
 

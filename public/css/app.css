@@ -8513,6 +8513,10 @@ button.close {
   }
 }
 
+body {
+  min-height: 100vh;
+}
+
 textarea {
   resize: vertical;
 }

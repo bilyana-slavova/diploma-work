@@ -23,18 +23,98 @@ const app = new Vue({
 
 
 $(document).ready(function(){
-  var ingredientId = 0;
+  var ingredientId = $('.ingredient').length - 1;
 
   $(document).on('click', '#addIngredient', cloneIngredient);
   $(document).on('click', '.btn-remove', removeIngredient);
 
-  $('#tagit').tagit({
-    autocomplete: {
-      source: '/ingredients/find',
-      minLength: 3
-    },
-    placeholderText: 'Type your ingredient'
+  $('#tagit').tokenize2({
+
+    // max number of tags
+    tokensMaxItems: 5,
+
+    // allow you to create custom tokens
+    tokensAllowCustom: false,
+
+    // max items in the dropdown
+    dropdownMaxItems: 10,
+
+    // minimum of characters required to start searching
+    searchMinLength: 3,
+
+    // specify if Tokenize2 will search from the begining of a string
+    searchFromStart: true,
+
+    // choose if you want your search highlighted in the result dropdown
+    searchHighlight: true,
+
+    // custom delimiter
+    delimiter: ',',
+
+    // data source
+    dataSource: '/ingredients/find',
+
+    // waiting time between each search
+    debounce: 500,
+
+    // custom placeholder text
+    placeholder: 'Type in ingredients',
+
+    // enable sortable
+    // requires jQuery UI
+    sortable: false,
+
+    // tabIndex
+    tabIndex: 0
+
   });
+
+  initIngredientAutocomplete($('.ingredient-name'));
+
+  function initIngredientAutocomplete(elem) {
+
+    elem.tokenize2({
+
+      // max number of tags
+      tokensMaxItems: 1,
+
+      // allow you to create custom tokens
+      tokensAllowCustom: false,
+
+      // max items in the dropdown
+      dropdownMaxItems: 10,
+
+      // minimum of characters required to start searching
+      searchMinLength: 3,
+
+      // specify if Tokenize2 will search from the begining of a string
+      searchFromStart: true,
+
+      // choose if you want your search highlighted in the result dropdown
+      searchHighlight: true,
+
+      // custom delimiter
+      delimiter: ',',
+
+      // data source
+      dataSource: '/ingredients/find',
+
+      // waiting time between each search
+      debounce: 500,
+
+      // custom placeholder text
+      placeholder: 'Type in ingredient',
+
+      // enable sortable
+      // requires jQuery UI
+      sortable: false,
+
+      // tabIndex
+      tabIndex: 0
+
+    });
+  }
+
 
   $("#sidebar-toggle").click(function(e) {
     e.preventDefault();
@@ -46,7 +126,7 @@ $(document).ready(function(){
     console.log('cloned');
     ingredientId++;
 
-    $newIngredient = $('.ingredient').first().clone();
+    $newIngredient = $('.ingredient').last().clone();
     $newIngredient.attr("id", "ingredient_" +  ingredientId);
     $newIngredient.find('[name]').each(function() {
       var name = $(this).attr('name');
@@ -57,7 +137,11 @@ $(document).ready(function(){
     $removeIngredient.attr('id', 'removeIngredient_' + ingredientId);
     $removeIngredient.attr('data-id', ingredientId);
     $newIngredient.find('.form-group').first().append($removeIngredient);
+    $newIngredient.find('.tokenize').remove();
+
     $newIngredient.appendTo('.ingredients');
+
+    initIngredientAutocomplete($newIngredient.find('select[multiple]'));
   };
 
   function removeIngredient(e){

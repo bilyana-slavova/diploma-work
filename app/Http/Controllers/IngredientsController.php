@@ -98,9 +98,16 @@ class IngredientsController extends Controller
 
     public function find(Request $request)
     {
-      	$term = $request->term;
+      	$term = $request->search;
 
         $ingredients = Ingredient::where('name', 'like', '%' . $term . '%')->get();
+
+        $ingredients = $ingredients->map(function ($item) {
+          return [
+            'text' => $item->name,
+            'value' => $item->id
+          ];
+        });
 
         return response()->json($ingredients, 200);
   }

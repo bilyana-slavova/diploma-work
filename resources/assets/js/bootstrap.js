@@ -16,7 +16,7 @@ try {
     require('jquery-ui/ui/widget.js');
     require('jquery-ui/ui/position.js');
     require('jquery-ui/ui/widgets/autocomplete.js');
-    require('tag-it');
+    require('./tokenize2.min.js');
 } catch (e) {}
 
 /**

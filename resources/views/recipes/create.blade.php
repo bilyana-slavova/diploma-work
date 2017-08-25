@@ -86,11 +86,13 @@
                             </div>
                         </div>
 
+                        <div class="ingredients">
                         @forelse($ingredients as $ingredient)
                           @include('recipes.partials.recipe-ingredients', ['index' => $loop->index])
                         @empty
                           @include('recipes.partials.recipe-ingredients', ['index' => 0])
                         @endforelse
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4" style ="text-align:center;">

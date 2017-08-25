@@ -1,11 +1,17 @@
+
+  @if ($index === 0)
   <a href="" class="btn btn-success" id="addIngredient">Add</a>
+  @endif
 
   <div class="ingredient">
     <div class="form-group{{ $errors->has('ingredients.'.$index.'.id') ? ' has-error' : '' }}">
         <label for="ingredient" class="col-md-4 control-label">Ingredient</label>
 
         <div class="col-md-6">
-            <input id="ingredient" type="text" class="form-control" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required autofocus>
+
+            <select class="ingredient-name" name="ingredients[{{$index}}][id]" multiple>
+                <option value="{{ $ingredient['id'] }}" selected>{{ $ingredient['name'] }}</option>
+            </select>
 
             <!-- <input type="hidden" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required> -->
 
@@ -21,7 +27,7 @@
         <label for="amount" class="col-md-4 control-label">Amount</label>
 
         <div class="col-md-3">
-            <input id="amount" type="text" class="form-control" name="ingredients[{{$index}}][amount]" value="{{ old('ingredients.'.$index.'.amount') }}" required autofocus>
+            <input id="amount" type="text" class="form-control" name="ingredients[{{$index}}][amount]" value="{{ $ingredient['amount'] }}" required autofocus>
 
             @if ($errors->has('ingredients.'.$index.'.amount'))
                 <span class="help-block">

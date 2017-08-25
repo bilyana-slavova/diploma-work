@@ -78,9 +78,11 @@
                               </form>
                           </li>
 
+                          @if(Auth::check() && Auth::user()->isAdmin())
                           <li>
                             <a href="{{ route('recipe-categories.index') }}">Categories</a>
                           </li>
+                          @endif
                         </ul>
                     </li>
                 @endif

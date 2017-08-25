@@ -31,7 +31,7 @@
         <div class="recipe_actions">
           <form class="" action="{{ route('recipes.favorite', ['recipe' => $recipe->id]) }}" method="post">
             {{ csrf_field() }}
-            <button type="submit" class="btn-circle">
+            <button type="submit" class="btn-circle{{ $recipe->favorited ? ' btn-favorited' : '' }}">
               <span class="glyphicon glyphicon-heart"></span>
             </button>
 

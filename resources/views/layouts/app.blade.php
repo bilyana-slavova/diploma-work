@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/tokenize2.min.css') }}">
 </head>
 <body>
     <div id="app">
@@ -42,5 +43,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- <script src="{{ asset('tokenize2.js') }}"></script> -->
 </body>
 </html>
