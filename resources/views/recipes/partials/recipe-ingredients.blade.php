@@ -5,7 +5,9 @@
         <label for="ingredient" class="col-md-4 control-label">Ingredient</label>
 
         <div class="col-md-6">
-            <input id="ingredient" type="text" class="form-control" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required autofocus>
+          <select class="ingredient-name" name="ingredients[{{$index}}][id]" multiple>
+              <option value="{{ old('ingredients.'.$index.'.id') }}" selected>{{ old('ingredients.'.$index.'.name') }}</option>
+          </select>
 
             <!-- <input type="hidden" name="ingredients[{{$index}}][id]" value="{{ old('ingredients.'.$index.'.id') }}" required> -->
 

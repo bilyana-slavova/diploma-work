@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<h2 style="text-align: center">Add or Delete Measurement</h2>
+<br>
   <ul class="categories">
     @forelse($measurements as $measurement)
       <li>
@@ -10,5 +12,7 @@
       <p>No measurements yet!</p>
     @endforelse
   </ul>
-  <a href="{{ route('measurements.create')}}" class="btn btn-primary">Create Measurement</a>
+  <div style="text-align: center">
+    <a href="{{ route('measurements.create')}}" class="btn btn-primary">Create Measurement</a>
+  </div>
 @endsection

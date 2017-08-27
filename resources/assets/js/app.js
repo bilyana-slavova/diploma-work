@@ -136,8 +136,10 @@ $(document).ready(function(){
     $removeIngredient = $('<a href="#" class="btn btn-remove">x</a>');
     $removeIngredient.attr('id', 'removeIngredient_' + ingredientId);
     $removeIngredient.attr('data-id', ingredientId);
+    $newIngredient.find('.btn-remove').remove();
     $newIngredient.find('.form-group').first().append($removeIngredient);
     $newIngredient.find('.tokenize').remove();
+    $newIngredient.find('select, input').val('');
 
     $newIngredient.appendTo('.ingredients');
 

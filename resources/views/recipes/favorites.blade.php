@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 style=" margin-bottom: 20px; text-align: center; color: #222; ">Your Favoroite Recipes</h2>
+<h2 style=" margin-bottom: 20px; text-align: center; ">Welcome To Your Favoroite Recipes!</h2>
+<h3 style=" margin-bottom: 20px; text-align: center; ">Tap <span class="glyphicon glyphicon-heart"></span> to save any recipe you like.</h3>
 
 <div class="row">
   @forelse($recipes as $recipe)

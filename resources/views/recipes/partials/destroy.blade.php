@@ -3,6 +3,6 @@
   {{ method_field('DELETE') }}
 
   <button type="submit" name="button" class="btn btn-danger">
-    x
+    <span class="glyphicon glyphicon-remove"></span>
   </button>
 </form>

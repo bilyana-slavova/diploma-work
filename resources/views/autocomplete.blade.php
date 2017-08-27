@@ -1,5 +1,4 @@
-<form class="" method="POST" action="{{ route('recipes.find') }}">
-{{ csrf_field() }}
+<form class="" method="GET" action="{{ route('recipes.find') }}">
 
 <div class="form-group">
     <div class="tagit">

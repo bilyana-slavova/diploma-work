@@ -14,20 +14,25 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .sidebar-inner { padding: 80px 10px 0; }
 .sidebar_title { text-align: center; }
 
-.recipe { height: 280px; border: 1px solid #eee; border-radius: 4px; box-shadow: 1px 2px 10px #eee; }
+.recipe { height: 280px; margin-bottom: 25px; border: 1px solid #eee; border-radius: 4px; box-shadow: 1px 2px 10px #eee; }
+.recipe .recipe_title { color: inherit; }
+.recipe .recipe_title:hover { color: #e85959; }
+
 .recipe_info { padding: 0 20px; }
+.recipe_row { padding: 8px 0; border-bottom: 1px solid #dedede; font-size:: 16px; }
 .recipe_actions { padding: 10px; text-align: right; }
 .recipe_actions a { display: inline-block; color: #000; text-decoration: none; }
 .recipe_actions span { font-size: 20px; }
 
 .recipe_header { position: relative; padding: 10px 0; margin-bottom: 25px; text-align: center; background-color: #222; color: #fff; }
 .recipe_header h3 { display: inline-block; margin: 0; }
-.recipe .btn-danger { position: absolute; right: 5px; top: 5px; }
+.recipe_header .btn-danger { position: absolute; right: 5px; top: 5px; }
+.recipe_header .btn-edit {  position: absolute; right: 50px; top: 5px; }
 
 .ingredient_action { text-align: center; }
 
 .categories { list-style: none; }
-.categories li { display: inline-block; width: 10%; padding: 10px; margin: 0 20px 15px; border: 1px solid #dedede; border-radius: 4px; background-color: #eee; text-align: center; }
+.categories li { display: inline-block; width: 15%; padding: 10px; margin: 0 20px 15px; border: 1px solid #dedede; border-radius: 4px; background-color: #eee; text-align: center; }
 
 #tagit { background-color: #fff; }
 .tagit_actions { text-align: center; }
@@ -68,6 +73,7 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
 #page-content-wrapper {
     width: 100%;
+    min-height: 100vh;
     position: absolute;
     padding: 15px;
 }

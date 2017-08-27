@@ -34,7 +34,11 @@ class HomeController extends Controller
 
     public function sendEmail(Request $request) {
       Mail::send(new ContactForm($request->all()));
-      dd('heey');
+
       return redirect()->route('contact');
+    }
+
+    public function contact(){
+      return view('contact');
     }
 }

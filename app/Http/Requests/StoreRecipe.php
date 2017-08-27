@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreRecipe extends FormRequest
 {
@@ -25,7 +26,7 @@ class StoreRecipe extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'category_id' => 'required|exists:recipe_category,id',
+            'category' => 'required|exists:recipe_category,id',
             'prep_time' => 'required|numeric',
             'cook_time' => 'required|numeric',
             'instructions' => 'required',
@@ -42,4 +43,9 @@ class StoreRecipe extends FormRequest
           'ingredients.*.measurement.exists' => 'No such measurements.'
         ];
     }
+
+    // public function failedValidation(Validator $validator)
+    // {
+    //     dd($this->formatErrors($validator));
+    // }
 }

@@ -7,10 +7,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'My Kitchen') }}</title>
 
     <!-- Styles -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/tokenize2.min.css') }}">
 </head>
@@ -23,22 +23,15 @@
               <div class="sidebar_title">
                 <h4>Search Recipe by Ingredient</h4>
               </div>
-
+              
               @include('autocomplete')
-
             </div>
         </div>
 
         <div id="page-content-wrapper">
-
             @yield('content')
-
         </div>
       </div>
-
-      <!-- <footer class="footer text-center">
-        <p>Copyright 2017 &copy </p>
-      </footer> -->
     </div>
 
     <!-- Scripts -->

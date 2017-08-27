@@ -3,10 +3,9 @@
 @section('content')
 <div class="jumbotron text-center">
   <div class="container">
-    <h1>Welcome to Kitchen Lab</h1>
+    <h1>Welcome to My Kitchen</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis recusandae iste repudiandae quam nisi
-     corporis?</p>
+    <p>This is the place where you can find the best recipes. Have fun cooking, Chef!</p>
   </div>
 </div>
 @endsection

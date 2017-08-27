@@ -6,7 +6,9 @@
     <div class="col-md-4">
       <div class="recipe">
         <header class="recipe_header">
-          <h3>{{ $recipe->name }}</h3>
+          <a class="recipe_title" href="{{ route('recipes.show', ['recipe' => $recipe->id]) }}">
+            <h3>{{ $recipe->name }}</h3>
+          </a>
 
           @can('delete', $recipe)
             @include('recipes.partials.destroy')
@@ -19,7 +21,7 @@
           <p>
             Ingredients:
             @foreach($recipe->ingredients as $ingredient)
-              {{ $ingredient->name . (! $loop->last ? ', ' : '')  }}
+              <strong>{{ $ingredient->name . (! $loop->last ? ', ' : '')  }}</strong>
             @endforeach
           </p>
 

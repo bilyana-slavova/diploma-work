@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<h2 style="text-align:center;">Add or Delete Ingredient</h2>
+<br>
+
   <ul class="categories">
     @forelse($ingredients as $ingredient)
       <li>
@@ -13,5 +16,8 @@
 
     @endforelse
   </ul>
-  <a href="{{ route('ingredients.create') }}" class="btn btn-primary">Create Ingredient</a>
+
+  <div style="text-align: center">
+    <a href="{{ route('ingredients.create') }}" class="btn btn-primary">Create Ingredient</a>
+  </div>
 @endsection

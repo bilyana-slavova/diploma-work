@@ -10,7 +10,12 @@ class Recipe extends Model
     public function ingredients()
    {
        return $this->belongsToMany('App\Ingredient', 'recipe_ingredients', 'recipe_id', 'ingredient_id')->withPivot('amount', 'measurement_id');
-;
+
+   }
+
+   public function recipeIngredients()
+   {
+      return $this->hasMany('App\RecipeIngredient');
    }
 
    public function category()
@@ -25,4 +30,5 @@ class Recipe extends Model
     {
         return $this->belongsToMany('App\User', 'favourite_recipes', 'recipe_id', 'user_id');
     }
+
 }

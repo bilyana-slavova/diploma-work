@@ -24,11 +24,7 @@ class RecipesController extends Controller
         $recipes = Recipe::all();
         $recipes->load('category', 'ingredients', 'favoriters');
 
-          $recipes = $recipes->map(function ($recipe) {
-            $recipe->favorited = Auth::check() && $recipe->favoriters->where('id', Auth::id())->count();
-            return $recipe;
-          });
-
+          $recipes = $this->setFavoritedAttribute($recipes);
         return view('recipes.index', compact('recipes'));
     }
 
@@ -62,24 +58,16 @@ class RecipesController extends Controller
         $recipe = new Recipe;
 
         $recipe->name = $request->name;
-        $recipe->category_id = $request->category_id;
+        $recipe->category_id = $request->category;
         $recipe->prep_time = $request->prep_time;
         $recipe->cook_time = $request->cook_time;
         $recipe->instructions = $request->instructions;
         $recipe->user_id = Auth::user()->id;
         $recipe->save();
 
-        $ingredients = collect($request->ingredients)->keyBy('id');
+        $ingredients = $this->formatIngredient($request->ingredients);
 
-        foreach ($ingredients as $key => $ingredient) {
-          $temp = $ingredient;
-          $temp['measurement_id'] = $ingredient['measurement'];
-          unset($temp['id']);
-          unset($temp['measurement']);
-
-          $ingredients[$key] = $temp;
-        }
-
+        // dd($ingredients);
         $recipe->ingredients()->attach($ingredients);
         // TODO: redirect user to the newly created recipe's page
         return back()->withMessage('success', 'Successfully created new recipe!');
@@ -93,6 +81,9 @@ class RecipesController extends Controller
      */
     public function show(Recipe $recipe)
     {
+        $recipe->load('recipeIngredients.measurement', 'recipeIngredients.ingredient');
+        $recipe->ingredients = $recipe->recipeIngredients;
+
         return view('recipes.show', compact('recipe'));
     }
 
@@ -124,12 +115,8 @@ class RecipesController extends Controller
           $ingredients = old('ingredients');
         }
 
-
         $recipeCategories = RecipeCategory::all();
         $measurements = Measurement::all();
-        // $ingredients = !is_null(old('ingredients')) ? old('ingredients') : $ingr;
-        // dd($ingredients);
-        // dd($recipe->toArray());
 
         return view('recipes.edit', compact('recipe', 'recipeCategories', 'measurements', 'ingredients'));
     }
@@ -146,14 +133,15 @@ class RecipesController extends Controller
         $this->authorize('update', $recipe);
 
         $recipe->name = $request->name;
-        $recipe->category_id = $request->category_id;
+        $recipe->category_id = $request->category;
         $recipe->prep_time = $request->prep_time;
         $recipe->cook_time = $request->cook_time;
         $recipe->instructions = $request->instructions;
 
         $recipe->save();
-
-        return route('recipes.index');
+        $ingredients = $this->formatIngredient($request->ingredients);
+        $recipe->ingredients()->sync($ingredients);
+        return redirect()->route('recipes.index');
     }
 
     /**
@@ -199,10 +187,43 @@ class RecipesController extends Controller
     {
         $ingredients = $request->ingredients;
 
-        $recipes = Recipe::whereHas('ingredients', function ($query) use ($ingredients) {
+        if (! count($ingredients)) {
+          $recipes = collect([]);
+          return view('recipes.index', compact('recipes'));
+        }
+
+        $recipes = Recipe::with('favoriters')
+        ->whereHas('ingredients', function ($query) use ($ingredients) {
             $query->whereIn('id', $ingredients);
         }, '=', count($ingredients))->get();
 
+        $recipes = $this->setFavoritedAttribute($recipes);
+        
         return view('recipes.index', compact('recipes'));
+    }
+
+    public function formatIngredient($ingredients)
+    {
+      $formatted = collect($ingredients)->keyBy('id');
+
+      foreach ($formatted as $key => $ingredient) {
+        $temp = $ingredient;
+        $temp['measurement_id'] = $ingredient['measurement'];
+        unset($temp['id']);
+        unset($temp['measurement']);
+
+        $formatted[$key] = $temp;
+      }
+
+      return $formatted;
+    }
+
+    public function setFavoritedAttribute($recipes)
+    {
+       return $recipes->map(function ($recipe) {
+         $recipe->favorited = Auth::check() && $recipe->favoriters->where('id', Auth::id())->count();
+         return $recipe;
+       });
+
     }
 }

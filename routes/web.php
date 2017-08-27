@@ -19,17 +19,14 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/recipes/{recipe}/favorite', 'RecipesController@favorite')->name('recipes.favorite');
 Route::get('/recipes/favorite', 'RecipesController@getFavorite')->name('recipes.favorites.index');
-Route::post('/recipes/find', 'RecipesController@find')->name('recipes.find');
+Route::get('/recipes/find', 'RecipesController@find')->name('recipes.find');
 Route::get('/ingredients/find', 'IngredientsController@find');
+Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::post('/contact', 'HomeController@sendEmail')->name('contact.submit');
 
 

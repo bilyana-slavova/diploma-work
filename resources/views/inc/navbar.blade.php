@@ -28,14 +28,19 @@
                 </li>
 
                 <li>
-                  <a href="/contact">Contact</a>
-                </li>
-
-                <li>
                   <a href="#" id="sidebar-toggle">
                     <span class="glyphicon glyphicon-search"></span>
                   </a>
                 </li>
+
+                @if (!Auth::guest())
+                <li>
+                  <a href="{{ route('recipes.create') }}">
+                    Create Recipe
+                    <span class="	glyphicon glyphicon-cutlery"></span>
+                  </a>
+                </li>
+              @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -51,12 +56,23 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                          @if(Auth::check() && Auth::user()->isAdmin())
                           <li>
-                            <a href="{{ route('recipes.create') }}">
-                              <span class="	glyphicon glyphicon-cutlery"></span>
-                              Create Recipe
-                            </a>
+                            <a href="{{ route('ingredients.index') }}">Ingredients</a>
                           </li>
+
+                          <li>
+                            <a href="{{ route('ingredient-categories.index') }}">Ingredient Categories</a>
+                          </li>
+
+                          <li>
+                            <a href="{{ route('recipe-categories.index') }}">Recipe Categories</a>
+                          </li>
+
+                          <li>
+                            <a href="{{ route('measurements.index') }}">Measurements</a>
+                          </li>
+                          @endif
 
                           <li>
                             <a href="{{ route('recipes.favorites.index') }}">
@@ -77,12 +93,6 @@
                                   {{ csrf_field() }}
                               </form>
                           </li>
-
-                          @if(Auth::check() && Auth::user()->isAdmin())
-                          <li>
-                            <a href="{{ route('recipe-categories.index') }}">Categories</a>
-                          </li>
-                          @endif
                         </ul>
                     </li>
                 @endif

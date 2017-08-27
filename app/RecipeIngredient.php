@@ -13,8 +13,14 @@ class RecipeIngredient extends Model
       return $this->belongsTo('App\Recipe');
     }
 
+    public function ingredient()
+    {
+      return $this->belongsTo('App\Ingredient');
+    }
+
     public function measurement()
     {
       return $this->belongsTo('App\Measurement');
     }
+
 }
